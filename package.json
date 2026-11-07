@@ -1,0 +1,32 @@
+{
+  "name": "support-ops-dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "test": "vitest run",
+    "lint": "oxlint",
+    "format": "oxfmt --check .",
+    "format:write": "oxfmt --write .",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "next": "16.4.5",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/turbopack": "4",
+    "@types/node": "20",
+    "@types/react": "19",
+    "@types/react-dom": "19",
+    "oxfmt": "0.76.0",
+    "oxlint": "1.91.0",
+    "tailwindcss": "4",
+    "typescript": "5",
+    "vitest": "5.1.0"
+  },
+  "packageManager": "pnpm@12.18.0"
+}

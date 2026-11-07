@@ -1,0 +1,148 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #0b0f14;
+  --color-panel: #10161d;
+  --color-raised: #151d26;
+  --color-line: #232d38;
+  --color-text: #e8edf2;
+  --color-muted: #93a1b0;
+  --color-faint: #5d6b7a;
+  --color-rag: #e5a13d;
+  --color-agent: #34c77b;
+  --color-tickets: #4cc3ff;
+  --color-churn: #2dd4bf;
+  --color-alarm: #f2555a;
+
+  --font-sans: var(--font-public-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-text);
+}
+
+/* 1. Skeleton shimmer on data load */
+@keyframes shimmer {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-raised);
+}
+
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: rgba(232, 237, 242, 0.07);
+  animation: shimmer 1.1s ease-in-out infinite;
+}
+
+/* 2. Staggered card entrance, CSS only */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.enter {
+  opacity: 0;
+  animation: rise 0.45s ease-out forwards;
+}
+
+.enter-1 {
+  animation-delay: 0.05s;
+}
+
+.enter-2 {
+  animation-delay: 0.15s;
+}
+
+.enter-3 {
+  animation-delay: 0.25s;
+}
+
+.enter-4 {
+  animation-delay: 0.35s;
+}
+
+/* 3. Trajectory rows fade in as the replay reveals them */
+@keyframes rowin {
+  from {
+    opacity: 0;
+    transform: translateX(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.replay-row {
+  animation: rowin 0.25s ease-out;
+}
+
+/* 4. Gauge sweep on the churn link card */
+.churn-sweep {
+  position: relative;
+  overflow: hidden;
+}
+
+.churn-sweep::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--color-churn);
+  transform: scaleY(0.25);
+  transform-origin: bottom;
+  transition: transform 0.5s ease;
+}
+
+.churn-sweep:hover::before {
+  transform: scaleY(1);
+}
+
+/* 5. Slow color hovers everywhere */
+.lift {
+  transition:
+    border-color 0.5s ease,
+    background-color 0.5s ease,
+    color 0.5s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton::after {
+    animation: none;
+  }
+
+  .enter,
+  .replay-row {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .churn-sweep::before,
+  .lift {
+    transition: none;
+  }
+}
